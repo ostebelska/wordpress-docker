@@ -1,0 +1,22 @@
+services:
+  wordpress:
+    image: wordpress
+    ports:
+	- 80:80
+    environment:
+	- WORDPRESS_DB_HOST=${WORDPRESS_DB_HOST}
+      - WORDPRESS_DB_LOGIN=${WORDPRESS_DB_LOGIN}
+	- WORDPRESS_DB_PASSWORD=${WORDPRESS_DB_PASSWORD}
+      - WORDPRESS_DATABASE=${WORDPRESS_DATABASE}
+    depends_on:
+      - database
+	  
+  database:
+    image: mysql
+    environment:
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_LOGIN=${MYSQL_LOGIN}
+	- MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    volumes:
+      - ./data:/var/lib/mysql
+
